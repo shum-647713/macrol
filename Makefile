@@ -1,4 +1,4 @@
-SRCS := macrol.c
+SRCS := macrol.c device.c
 OBJS := ${SRCS:.c=.o}
 TARGET := macrol.so
 
