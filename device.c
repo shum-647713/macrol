@@ -1,4 +1,5 @@
 #include "device.h"
+#include "event.h"
 #include <errno.h>
 #include <lauxlib.h>
 #include <lua.h>
@@ -7,6 +8,8 @@
 
 const luaL_Reg macrol_device_metatable[] = {{NULL, NULL}};
 const luaL_Reg macrol_device_methods[] = {{"close", macrol_close_device},
+                                          {"read", macrol_read_event},
+                                          {"write", macrol_write_event},
                                           {NULL, NULL}};
 
 void macrol_create_device_metatable(lua_State *L) {
