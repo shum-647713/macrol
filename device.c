@@ -10,6 +10,7 @@ const luaL_Reg macrol_device_metatable[] = {{NULL, NULL}};
 const luaL_Reg macrol_device_methods[] = {{"close", macrol_close_device},
                                           {"read", macrol_read_event},
                                           {"write", macrol_write_event},
+                                          {"flush", macrol_flush_device},
                                           {NULL, NULL}};
 
 void macrol_create_device_metatable(lua_State *L) {
@@ -42,6 +43,16 @@ int macrol_close_device(lua_State *L) {
   FILE *device = luaL_checkudata(L, 1, MACROL_DEVICE);
 
   if (fclose(device) != 0) {
+    return luaL_error(L, "%s", strerror(errno));
+  }
+
+  return 0;
+}
+
+int macrol_flush_device(lua_State *L) {
+  FILE *device = luaL_checkudata(L, 1, MACROL_DEVICE);
+
+  if (fflush(device) != 0) {
     return luaL_error(L, "%s", strerror(errno));
   }
 

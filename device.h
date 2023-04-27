@@ -10,4 +10,6 @@ void macrol_create_device_metatable(lua_State *L);
 int macrol_open_device(lua_State *L);
 int macrol_close_device(lua_State *L);
 
+int macrol_flush_device(lua_State *L);
+
 #endif
